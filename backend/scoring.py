@@ -33,6 +33,36 @@ def find_missing_skills(resume_skills, job_skills):
     return list(set(job_skills) - set(resume_skills))
 
 # Function to generate feedback using TF-IDF
+
+def generate_feedback(resume_data, job_data):
+    """Generates feedback for improving the resume."""
+    feedback = []
+
+    # Check for missing skills
+    resume_skills = resume_data.get("skills", [])
+    job_skills = set(job_data.get("skills", []))
+    missing_skills = find_missing_skills(resume_skills, job_skills)
+    if missing_skills:
+        feedback.append(f"Consider adding these skills to your resume: {', '.join(missing_skills)}.")
+
+    # Check for experience gap
+    resume_exp = resume_data.get("experience", 0)
+    job_exp = job_data.get("min_experience", 2)
+    if resume_exp < job_exp:
+        feedback.append(f"Your experience ({resume_exp} years) is less than the required experience ({job_exp} years).")
+
+    # Check for education match
+    resume_education = resume_data.get("education", "").lower()
+    job_education = job_data.get("education", "").lower()
+    if resume_education not in job_education:
+        feedback.append(f"Consider highlighting your education to match the required level: {job_education}.")
+
+    # Add general feedback
+    if not feedback:
+        feedback.append("Your resume matches the job requirements well. Great job!")
+
+    return feedback
+
 def generate_feedback(resume_text):
     if not resume_text.strip():
         return ["Your resume appears empty. Please add relevant content."]
@@ -54,18 +84,27 @@ def generate_feedback(resume_text):
 
 # Function to calculate final resume score
 def calculate_score(resume_data, job_data):
-    resume_text = resume_data.get("text", "")
-    resume_skills = extract_skills(resume_text)
-    job_skills = set(job_data.get("skills", []))
-    
-    skill_match = calculate_semantic_similarity(resume_skills, job_skills)
-    
+    """Calculates a score for the resume based on the job data."""
+    # Extract structured fields from resume_data
+    resume_skills = resume_data.get("skills", [])
     resume_exp = resume_data.get("experience", 0)
+    resume_education = resume_data.get("education", "").lower()
+
+    # Extract job requirements
+    job_skills = set(job_data.get("skills", []))
     job_exp = job_data.get("min_experience", 2)
+    job_education = job_data.get("education", "").lower()
+
+    # Calculate skill match (semantic similarity)
+    skill_match = calculate_semantic_similarity(resume_skills, job_skills)
+
+    # Calculate experience match (scaled to 30%)
     experience_match = min(30, (resume_exp / job_exp) * 30) if job_exp else 30  # Cap at 30%
-    
-    education_match = 20 if resume_data.get("education", "").lower() in job_data.get("education", "").lower() else 0  
-    
+
+    # Calculate education match (20% if education matches)
+    education_match = 20 if resume_education in job_education else 0
+
+    # Return the final score and missing skills
     return {
         "score": round(skill_match + experience_match + education_match, 2),
         "missing_skills": find_missing_skills(resume_skills, job_skills)
