@@ -36,20 +36,10 @@
 ---
 ## 📷 Output Screenshots
 
+## 📄 Resume Screening Output
+
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/.../1stpg.png" width="70%"/>
-  <br><br>
-  <img src="https://user-images.githubusercontent.com/.../2ndpg.png" width="70%"/>
-  <br><br>
-  <img src="https://user-images.githubusercontent.com/.../3rdpg.png" width="70%"/>
-  <br><br>
-  <img src="https://user-images.githubusercontent.com/.../4thpg.png" width="70%"/>
-  <br><br>
-  <img src="https://user-images.githubusercontent.com/.../5thpg.png" width="70%"/>
-  <br><br>
-  <img src="https://user-images.githubusercontent.com/.../6thpg.png" width="70%"/>
-  <br><br>
-  <img src="https://user-images.githubusercontent.com/.../7thpg.png" width="70%"/>
+  <img src="https://user-images.githubusercontent.com/1234567890/abcdefghijk.png" width="70%" alt="1st Page Output">
 </p>
 
 
