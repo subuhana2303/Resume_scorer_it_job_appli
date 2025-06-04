@@ -40,10 +40,18 @@
 ### 📝 Resume Screening Output
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/your-uploaded-image-url.png" width="70%" alt="1st Page Output">
+  ![1st pg](https://github.com/user-attachments/assets/41b140c0-4936-469d-aab3-59d61b74a974)
+
+  ![2nd pg](https://github.com/user-attachments/assets/79512fdf-ea82-4431-83b0-91ebbaf5e858)
+  ![3rd pg](https://github.com/user-attachments/assets/4246b778-a73d-4234-af5a-e775f69cacd4)
+  ![4th pg](https://github.com/user-attachments/assets/e286ab7b-6cc0-4d20-bd5b-d3ded40ed9d0)
+  ![5th pg](https://github.com/user-attachments/assets/5a24e3d2-ee0d-4cd2-a2ca-a10498ab7008)
+  ![6th pg](https://github.com/user-attachments/assets/7861c7fa-da7c-41ab-a119-f94c47d1f389)
+  ![7th pg](https://github.com/user-attachments/assets/c121cc23-785b-4da7-9622-ad4fd5a80c8c)
+
 </p>
 
-![1st pg](https://github.com/user-attachments/assets/41b140c0-4936-469d-aab3-59d61b74a974)
+
 
 
 
