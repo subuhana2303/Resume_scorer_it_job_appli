@@ -3,7 +3,7 @@
 
 ---
 
-## 🚀 Features & ## 🗂️ Project Structure
+## 🚀 Features & 🗂️ Project Structure
 
 ✨ Upload your resume **Pdf format only**  
 
@@ -43,6 +43,7 @@
   <img src="https://user-images.githubusercontent.com/your-uploaded-image-url.png" width="70%" alt="1st Page Output">
 </p>
 
+![1st pg](https://github.com/user-attachments/assets/41b140c0-4936-469d-aab3-59d61b74a974)
 
 
 
