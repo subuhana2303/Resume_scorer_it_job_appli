@@ -39,17 +39,31 @@
 
 ### 📝 Resume Screening Output
 
-<p align="center">
-  ![1st pg](https://github.com/user-attachments/assets/41b140c0-4936-469d-aab3-59d61b74a974)
+<p align="center" style="font-family: Arial, sans-serif;">
 
-  ![2nd pg](https://github.com/user-attachments/assets/79512fdf-ea82-4431-83b0-91ebbaf5e858)
-  ![3rd pg](https://github.com/user-attachments/assets/4246b778-a73d-4234-af5a-e775f69cacd4)
-  ![4th pg](https://github.com/user-attachments/assets/e286ab7b-6cc0-4d20-bd5b-d3ded40ed9d0)
-  ![5th pg](https://github.com/user-attachments/assets/5a24e3d2-ee0d-4cd2-a2ca-a10498ab7008)
-  ![6th pg](https://github.com/user-attachments/assets/7861c7fa-da7c-41ab-a119-f94c47d1f389)
-  ![7th pg](https://github.com/user-attachments/assets/c121cc23-785b-4da7-9622-ad4fd5a80c8c)
+  <h3 style="color:#2a9d8f; margin-bottom:5px;">Phase 1</h3>
+  <img src="https://github.com/user-attachments/assets/41b140c0-4936-469d-aab3-59d61b74a974" alt="1st pg" width="600"/>
+
+  <h3 style="color:#e76f51; margin-top:30px; margin-bottom:5px;">Phase 2</h3>
+  <img src="https://github.com/user-attachments/assets/79512fdf-ea82-4431-83b0-91ebbaf5e858" alt="2nd pg" width="600"/>
+
+  <h3 style="color:#264653; margin-top:30px; margin-bottom:5px;">Phase 3</h3>
+  <img src="https://github.com/user-attachments/assets/4246b778-a73d-4234-af5a-e775f69cacd4" alt="3rd pg" width="600"/>
+
+  <h3 style="color:#f4a261; margin-top:30px; margin-bottom:5px;">Phase 4</h3>
+  <img src="https://github.com/user-attachments/assets/e286ab7b-6cc0-4d20-bd5b-d3ded40ed9d0" alt="4th pg" width="600"/>
+
+  <h3 style="color:#2a9d8f; margin-top:30px; margin-bottom:5px;">Phase 5</h3>
+  <img src="https://github.com/user-attachments/assets/5a24e3d2-ee0d-4cd2-a2ca-a10498ab7008" alt="5th pg" width="600"/>
+
+  <h3 style="color:#e76f51; margin-top:30px; margin-bottom:5px;">Phase 6</h3>
+  <img src="https://github.com/user-attachments/assets/7861c7fa-da7c-41ab-a119-f94c47d1f389" alt="6th pg" width="600"/>
+
+  <h3 style="color:#264653; margin-top:30px; margin-bottom:5px;">Phase 7</h3>
+  <img src="https://github.com/user-attachments/assets/c121cc23-785b-4da7-9622-ad4fd5a80c8c" alt="7th pg" width="600"/>
 
 </p>
+
 
 
 
