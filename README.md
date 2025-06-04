@@ -64,14 +64,14 @@
 
 </p>
 
-#### **contributors**
+#### **Contributors**
+#### ==================
+Stefy Thomas
 
-**Stefy Thomas**
+Subuhana B
 
-**Subuhana B**
+Sweth S
 
-**Sweth S**
-
-**Saniyah Sunil**
+Saniyah Sunil
 
 
