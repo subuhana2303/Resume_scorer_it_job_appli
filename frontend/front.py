@@ -1,170 +1,149 @@
-import os
 import streamlit as st
+import requests
+from io import BytesIO
+from matplotlib import pyplot as plt
 
-# Page Configuration
-st.set_page_config(page_title="RESUME SCORER FOR IT JOB APPLICANTS", layout="wide")
+# Page config and styling
+st.set_page_config(page_title="Resume Scorer for IT Jobs", layout="wide")
 
-# Get the absolute path of the asset folder
-asset_path = os.path.join(os.path.dirname(__file__), "asset")
-
-# Custom CSS for Styling
+# Custom CSS for styling
 st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
-
-        .stApp {
-            background: linear-gradient(135deg, #001f3f, #0074D9);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .title-text {
-            text-align: center;
-            font-size: 40px;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-family: 'Poppins', sans-serif;
-            color: white;
-            margin-bottom: 40px; /* Increased gap */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .title-icon {
-            width: 50px;
-            height: auto;
-        }
-
-        .how-it-works {
-            text-align: center;
-            font-size: 30px;
-            font-weight: bold;
-            color: white;
-            margin-top: 50px; /* Added more gap after How It Works */
-            margin-bottom: 30px; 
-        }
-
-        .how-it-works-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px; /* Increased gap between boxes */
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .how-it-works-box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            width: 30%;
-        }
-
-        .upload-container {
-            padding: 30px;
-            text-align: left;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            width: 60%;
-            margin-top: 50px; /* Increased gap */
-        }
-
-        .dropdown-label {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: white;
-        }
-
-        .submit-btn {
-            background-color: #6C63FF;
-            color: white;
-            font-size: 18px;
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            margin-top: 20px; /* More spacing */
-        }
-
-        .left-container {
-            width: 50%;
-            padding-left: 10%;
-        }
-        
-        .right-container img {
-            width: 70%; /* Reduced size to zoom */
-            height: auto;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+    body, .css-1d391kg {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        min-height: 100vh;
+        padding: 2rem 5rem;
+    }
+    .stButton>button {
+        background: #764ba2;
+        color: white;
+        font-weight: 700;
+        border-radius: 10px;
+        padding: 10px 20px;
+        transition: background 0.3s ease;
+    }
+    .stButton>button:hover {
+        background: #667eea;
+    }
+    .header {
+        font-size: 3rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 0.2rem;
+    }
+    .subheader {
+        font-size: 1.3rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        color: #d1c4e9;
+    }
+    .score-box {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin-top: 2rem;
+    }
+    .bar-container {
+        background: #d1c4e9;
+        border-radius: 10px;
+        height: 25px;
+        width: 100%;
+        margin-top: 10px;
+    }
+    .bar-fill {
+        height: 100%;
+        background: #764ba2;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: 700;
+        color: white;
+        line-height: 25px;
+    }
     </style>
 """, unsafe_allow_html=True)
 
-# Title with Resume Icon
-st.markdown("""
-    <div class="title-text">
-        RESUME SCORER FOR IT JOB APPLICANTS
-        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991588.png" class="title-icon">
-    </div>
-""", unsafe_allow_html=True)
+# Title and intro
+st.markdown('<div class="header">📄 Resume Scorer for IT Job Applicants</div>', unsafe_allow_html=True)
+st.markdown('<div class="subheader">Upload your PDF resume, select your job role, and get scored instantly!</div>', unsafe_allow_html=True)
 
-# Main Layout
-col1, col2 = st.columns([1, 1])
+# Job roles
+JOB_ROLES = ["Frontend Developer", "Backend Developer", "Full Stack Developer", "UI/UX Designer", "Other"]
 
-# Left Side: Upload & Job Role Selection
-with col1:
-    st.markdown("<div class='left-container'>", unsafe_allow_html=True)
-    
-    uploaded_file = st.file_uploader("Drop your resume here or choose a file", type=["pdf", "docx"])
-    st.markdown("<br>", unsafe_allow_html=True)
+# Upload and select UI
+with st.form("upload_form"):
+    uploaded_file = st.file_uploader("📄 Upload your Resume (PDF only)", type=["pdf"])
+    job_role = st.selectbox("💼 Select Job Role", JOB_ROLES)
+    custom_role = ""
+    if job_role == "Other":
+        custom_role = st.text_input("Enter your job role")
+    submitted = st.form_submit_button("🚀 Get Resume Score")
 
-    st.markdown("<span class='dropdown-label'>Select Job Role:</span>", unsafe_allow_html=True)
-    job_roles = ["Select the Job Role", "Frontend Developer", "Prompt Engineer", "Backend Developer", "Python Developer", "Other"]
-    selected_role = st.selectbox("", job_roles, index=0)
+if submitted:
+    if not uploaded_file:
+        st.error("Please upload a PDF resume.")
+    else:
+        actual_role = custom_role if job_role == "Other" and custom_role.strip() else job_role
 
-    if selected_role == "Other":
-        custom_role = st.text_input("Enter your job role:")
+        with st.spinner("Scoring your resume..."):
+            # Call Flask API
+            try:
+                files = {"resume": (uploaded_file.name, uploaded_file, "application/pdf")}
+                data = {"job_role": actual_role}
+                response = requests.post("http://127.0.0.1:5000/api/score", files=files, data=data)
 
-    st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("Get Resume Score"):
-        job_title = custom_role if selected_role == "Other" else selected_role
-        if selected_role == "Select the Job Role":
-            st.error("Please select a valid job role.")
-        else:
-            st.success(f"Resume uploaded successfully for {job_title}")
+                if response.status_code == 200:
+                    result = response.json()
 
-    st.markdown("</div>", unsafe_allow_html=True)
+                    # Score display
+                    score = result.get("score", 0)
+                    suggestions = result.get("suggestions", [])
+                    feedback = result.get("feedback", "")
+                    courses = result.get("courses", [])
 
-# Right Side: Resume Analysis Image
-with col2:
-    st.markdown("<div class='right-container'>", unsafe_allow_html=True)
-    st.image(os.path.join(asset_path, "resume.jpg"), caption="Resume Analysis", use_container_width=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+                    st.markdown(f'<div class="score-box"><h3>📊 Resume Match Score: {score}/100</h3></div>', unsafe_allow_html=True)
+                    # Progress bar style
+                    bar_width = min(max(score, 0), 100)
+                    st.markdown(f'''
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width:{bar_width}%;">{bar_width}%</div>
+                        </div>
+                    ''', unsafe_allow_html=True)
 
-# How It Works Section (Now Below the Upload Section)
-st.markdown("<h2 class='how-it-works'>How It Works</h2>", unsafe_allow_html=True)
+                    # Improvement checklist
+                    st.markdown("### ✅ Improvement Suggestions")
+                    if suggestions:
+                        for s in suggestions:
+                            st.markdown(f"- {s}")
+                    else:
+                        st.markdown("Your resume covers all the important skills!")
 
-# Create Three Columns for Steps
-col1, col2, col3 = st.columns(3)
+                    # Feedback section
+                    st.markdown("### 💡 Personalized Feedback")
+                    st.info(feedback)
 
-with col1:
-    st.image(os.path.join(asset_path, "upload.jpg"), width=120)
-    st.markdown("<h3 style='text-align:center;'>1. Upload your resume</h3>", unsafe_allow_html=True)
-    st.write("<p style='text-align:center;'>Just upload your resume, no matter what state it is in.</p>", unsafe_allow_html=True)
+                    # Recommended courses
+                    if courses:
+                        st.markdown("### 🎓 Recommended Skill Improvement Courses")
+                        for course in courses:
+                            st.markdown(f"- {course}")
 
-with col2:
-    st.image(os.path.join(asset_path, "score meter.jpeg"), width=120)
-    st.markdown("<h3 style='text-align:center;'>2. Resume Scoring</h3>", unsafe_allow_html=True)
-    st.write("<p style='text-align:center;'>Our algorithm scores your resume based on industry standards.</p>", unsafe_allow_html=True)
+                    # Skill breakdown chart (mocked here)
+                    st.markdown("### 📈 Skill Match Breakdown")
+                    skills = ["Core Skills", "Relevant Experience", "Education", "Certifications"]
+                    # Dummy percentages for demo, ideally from backend
+                    values = [score*0.7, score*0.2, score*0.1, score*0.05]
 
-with col3:
-    st.image(os.path.join(asset_path, "feedback 2.jpg"), width=120)
-    st.markdown("<h3 style='text-align:center;'>3. Get Instant Feedback</h3>", unsafe_allow_html=True)
-    st.write("<p style='text-align:center;'>Get a detailed report on how to improve your resume.</p>", unsafe_allow_html=True)
+                    fig, ax = plt.subplots()
+                    ax.barh(skills, values, color="#764ba2")
+                    ax.set_xlim(0, 100)
+                    ax.set_xlabel("Match Percentage")
+                    st.pyplot(fig)
+
+                else:
+                    st.error(f"API Error: {response.json().get('error', 'Unknown error')}")
+
+            except Exception as e:
+                st.error(f"Failed to connect to backend API: {e}")
