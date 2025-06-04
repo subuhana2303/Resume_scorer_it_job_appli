@@ -59,7 +59,7 @@
   <h3 style="color:#e76f51; margin-top:30px; margin-bottom:5px;">Phase 6</h3>
   <img src="https://github.com/user-attachments/assets/7861c7fa-da7c-41ab-a119-f94c47d1f389" alt="6th pg" width="600"/>
 
-  <h3 style="color:#264653; margin-top:30px; margin-bottom:5px;">Phase 7</h3>
+  <h3 style="color:#264653; margin-top:30px; margin-bottom:5px;">Accuracy percentage</h3>
   <img src="https://github.com/user-attachments/assets/c121cc23-785b-4da7-9622-ad4fd5a80c8c" alt="7th pg" width="600"/>
 
 </p>
