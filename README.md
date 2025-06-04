@@ -34,12 +34,13 @@
 | 📈 Charting | Matplotlib            |
 
 ---
-## 📷 Output Screenshots
 
-## 📄 Resume Screening Output
+## 📸 Output Screenshots
+
+### 📝 Resume Screening Output
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/1234567890/abcdefghijk.png" width="70%" alt="1st Page Output">
+  <img src="https://user-images.githubusercontent.com/your-uploaded-image-url.png" width="70%" alt="1st Page Output">
 </p>
 
 
